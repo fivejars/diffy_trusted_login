@@ -1,0 +1,26 @@
+{
+    "name": "fivejars/diffy_trusted_login",
+    "description": "Lets Diffy log in past the login form's bot protections via a secret request header, with optional spambot and TFA integration.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+        "drupal",
+        "diffy",
+        "visual regression",
+        "login",
+        "captcha",
+        "honeypot",
+        "antibot",
+        "recaptcha",
+        "turnstile",
+        "spambot",
+        "tfa"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "drupal/core": "^10.3 || ^11"
+    },
+    "suggest": {
+        "drupal/tfa": "Enable the diffy_trusted_login_tfa submodule to let Diffy accounts skip the second factor."
+    }
+}

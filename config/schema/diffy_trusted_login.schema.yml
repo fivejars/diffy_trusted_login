@@ -1,0 +1,16 @@
+diffy_trusted_login.settings:
+  type: config_object
+  label: 'Diffy trusted login settings'
+  mapping:
+    allowed_ips:
+      type: sequence
+      label: 'IP addresses or CIDR ranges allowed to use the token (empty allows any)'
+      sequence:
+        type: string
+        label: 'IP address or CIDR range'
+    accounts:
+      type: sequence
+      label: 'Usernames of the accounts Diffy logs in with'
+      sequence:
+        type: string
+        label: 'Username'

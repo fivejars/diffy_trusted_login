@@ -1,0 +1,5 @@
+diffy_trusted_login.settings:
+  title: 'Diffy trusted login'
+  description: 'Diffy token, allowed IP addresses and Diffy accounts.'
+  route_name: diffy_trusted_login.settings
+  parent: system.admin_config_services

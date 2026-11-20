@@ -1,0 +1,9 @@
+name: 'Diffy trusted login: TFA'
+type: module
+description: 'Lets the configured Diffy accounts skip the TFA second factor when logging in on a verified Diffy request.'
+core_version_requirement: ^10.3 || ^11
+package: FiveJars
+dependencies:
+  - diffy_trusted_login:diffy_trusted_login
+  - tfa:tfa
+configure: diffy_trusted_login.settings

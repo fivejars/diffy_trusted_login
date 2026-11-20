@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall hooks for Diffy trusted login.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Generate the Diffy token so it exists immediately after enabling.
+ */
+function diffy_trusted_login_install() {
+  \Drupal::service('diffy_trusted_login.token_manager')->ensureToken();
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Remove the stored token.
+ */
+function diffy_trusted_login_uninstall() {
+  \Drupal::service('diffy_trusted_login.token_manager')->deleteToken();
+}

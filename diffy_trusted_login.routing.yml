@@ -1,0 +1,17 @@
+diffy_trusted_login.settings:
+  path: '/admin/config/services/diffy-trusted-login'
+  defaults:
+    _form: 'Drupal\diffy_trusted_login\Form\SettingsForm'
+    _title: 'Diffy trusted login'
+  requirements:
+    _permission: 'administer site configuration'
+
+diffy_trusted_login.regenerate:
+  path: '/admin/config/services/diffy-trusted-login/regenerate'
+  defaults:
+    _form: 'Drupal\diffy_trusted_login\Form\RegenerateTokenForm'
+    _title: 'Regenerate Diffy token'
+  requirements:
+    _permission: 'administer site configuration'
+    # Closed while settings.php defines the token, as on the settings form.
+    _custom_access: 'Drupal\diffy_trusted_login\Form\RegenerateTokenForm::access'

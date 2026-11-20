@@ -1,0 +1,6 @@
+name: 'Diffy trusted login'
+type: module
+description: 'Lets Diffy log in past the login form''s bot protections via a secret request header, with optional spambot and TFA integration.'
+core_version_requirement: ^10.3 || ^11
+package: FiveJars
+configure: diffy_trusted_login.settings

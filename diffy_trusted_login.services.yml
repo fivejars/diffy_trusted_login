@@ -1,0 +1,46 @@
+services:
+  diffy_trusted_login.token_manager:
+    class: Drupal\diffy_trusted_login\DiffyTokenManager
+    arguments:
+      - '@state'
+      - '@request_stack'
+      - '@config.factory'
+      - !service_closure '@logger.channel.diffy_trusted_login'
+      - '@current_route_match'
+      - !service_closure '@user.auth'
+      - !service_closure '@flood'
+  Drupal\diffy_trusted_login\DiffyTokenManager: '@diffy_trusted_login.token_manager'
+
+  logger.channel.diffy_trusted_login:
+    parent: logger.channel_base
+    arguments: ['diffy_trusted_login']
+
+  diffy_trusted_login.access_policy:
+    class: Drupal\diffy_trusted_login\Access\DiffyAccessPolicy
+    arguments: ['@diffy_trusted_login.token_manager']
+    tags:
+      - { name: access_policy }
+
+  cache_context.diffy_login_request:
+    class: Drupal\diffy_trusted_login\Cache\Context\DiffyLoginRequestCacheContext
+    arguments: ['@diffy_trusted_login.token_manager']
+    tags:
+      - { name: cache.context }
+
+  cache_context.user.diffy_account:
+    class: Drupal\diffy_trusted_login\Cache\Context\DiffyAccountCacheContext
+    arguments: ['@current_user', '@diffy_trusted_login.token_manager']
+    tags:
+      - { name: cache.context }
+
+  # The internal page cache keys on the URL alone and runs before routing; this
+  # policy also makes Drupal send verified Diffy responses as private. The
+  # dynamic page cache varies by user.permissions, which already differs for
+  # Diffy login requests.
+  diffy_trusted_login.page_cache_request_policy.deny_diffy_requests:
+    class: Drupal\diffy_trusted_login\PageCache\DenyDiffyRequests
+    # A closure: the page cache builds its policies even for cache hits.
+    arguments: [!service_closure '@diffy_trusted_login.token_manager']
+    public: false
+    tags:
+      - { name: page_cache_request_policy }

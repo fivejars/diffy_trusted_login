@@ -1,0 +1,10 @@
+services:
+  diffy_trusted_login_tfa.login:
+    class: Drupal\diffy_trusted_login_tfa\DiffyTfaLogin
+    arguments: ['@diffy_trusted_login.token_manager', '@entity_type.manager', '@logger.channel.diffy_trusted_login']
+
+  # Registered explicitly so the #[LegacyHook] shim in the .module file can
+  # load it on Drupal < 11.1, which doesn't auto-register hook classes.
+  Drupal\diffy_trusted_login_tfa\Hook\DiffyTrustedLoginTfaHooks:
+    class: Drupal\diffy_trusted_login_tfa\Hook\DiffyTrustedLoginTfaHooks
+    autowire: true
